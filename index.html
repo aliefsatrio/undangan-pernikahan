@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undangan Pernikahan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+            background-color: #f9f7f2;
+            color: #4a4a4a;
+        }
+        
+        .hero-bg {
+            background-image: url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 253, 245, 0.7);
+            backdrop-filter: blur(3px);
+        }
+        
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .floral-decoration {
+            position: absolute;
+            opacity: 0.15;
+            z-index: 0;
+        }
+        
+        .floral-1 {
+            top: 5%;
+            left: 5%;
+            transform: rotate(-15deg);
+        }
+        
+        .floral-2 {
+            bottom: 5%;
+            right: 5%;
+            transform: rotate(15deg);
+        }
+        
+        .section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s, transform 0.6s;
+        }
+        
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .music-control {
+            transition: all 0.3s;
+        }
+        
+        .music-control:hover {
+            transform: scale(1.1);
+        }
+        
+        .gallery-item {
+            transition: all 0.3s;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.03);
+        }
+        
+        .rsvp-form input, .rsvp-form select {
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 1px solid #e2e2e2;
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+    <!-- Audio Background -->
+    <audio id="bgMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+    
+    <!-- Music Control -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <button id="musicToggle" class="music-control bg-amber-50 text-amber-700 rounded-full p-3 shadow-lg">
+            <i class="fas fa-music text-xl"></i>
+        </button>
+    </div>
+    
+    <!-- Hero Section -->
+    <section class="hero-bg min-h-screen flex items-center justify-center relative overflow-hidden">
+        <div class="container mx-auto px-4 py-20 z-10 text-center">
+            <div class="max-w-2xl mx-auto">
+                <p class="text-amber-700 mb-4 tracking-widest">Kami Berbahagia Mengundang Anda</p>
+                <h1 class="text-4xl md:text-6xl font-bold text-amber-800 mb-6">Diyan Wisnu Pratama & Sepviyanti</h1>
+                <p class="text-lg md:text-xl text-amber-700 mb-8">Akan melangsungkan pernikahan</p>
+                <p class="text-2xl md:text-3xl text-amber-800 mb-10">Selasa, 9 September 2025</p>
+                
+                <div class="animate-bounce mt-16">
+                    <button onclick="document.getElementById('undangan').scrollIntoView({behavior: 'smooth'})" class="inline-block border border-amber-700 text-amber-700 px-6 py-3 rounded-full hover:bg-amber-700 hover:text-white transition duration-300">
+                        <i class="fas fa-chevron-down mr-2"></i> Buka Undangan
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Floral Decorations -->
+        <div class="floral-decoration floral-1">
+            <svg width="120" height="120" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M50 0C50 0 54.8 20.8 62.5 25C70.2 29.2 90 25 90 25C90 25 70.2 29.2 75 37.5C79.8 45.8 100 50 100 50C100 50 79.8 54.2 75 62.5C70.2 70.8 90 75 90 75C90 75 70.2 70.8 62.5 75C54.8 79.2 50 100 50 100C50 100 45.2 79.2 37.5 75C29.8 70.8 10 75 10 75C10 75 29.8 70.8 25 62.5C20.2 54.2 0 50 0 50C0 50 20.2 45.8 25 37.5C29.8 29.2 10 25 10 25C10 25 29.8 29.2 37.5 25C45.2 20.8 50 0 50 0Z" fill="#B78D65"/>
+            </svg>
+        </div>
+        <div class="floral-decoration floral-2">
+            <svg width="120" height="120" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M50 0C50 0 54.8 20.8 62.5 25C70.2 29.2 90 25 90 25C90 25 70.2 29.2 75 37.5C79.8 45.8 100 50 100 50C100 50 79.8 54.2 75 62.5C70.2 70.8 90 75 90 75C90 75 70.2 70.8 62.5 75C54.8 79.2 50 100 50 100C50 100 45.2 79.2 37.5 75C29.8 70.8 10 75 10 75C10 75 29.8 70.8 25 62.5C20.2 54.2 0 50 0 50C0 50 20.2 45.8 25 37.5C29.8 29.2 10 25 10 25C10 25 29.8 29.2 37.5 25C45.2 20.8 50 0 50 0Z" fill="#B78D65"/>
+            </svg>
+        </div>
+    </section>
+    
+    <!-- Main Content -->
+    <main id="undangan" class="bg-amber-50 py-20">
+        <div class="container mx-auto px-4">
+            <!-- Couple Section -->
+            <section class="section mb-28 max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-amber-800 mb-6">Assalamu'alaikum Warahmatullahi Wabarakatuh</h2>
+                <p class="text-lg md:text-xl mb-8 leading-relaxed">
+                    Dengan memohon rahmat dan ridho Allah Subhanahu Wa Ta'ala, 
+                    kami bermaksud menyelenggarakan pernikahan putra-putri kami:
+                </p>
+                
+                <div class="flex flex-col md:flex-row justify-center items-center gap-12 my-16">
+                    <div class="text-center">
+                        <h3 class="text-2xl md:text-3xl font-bold text-amber-800 mb-2">Diyan Wisnu Pratama</h3>
+                        <p class="text-amber-700">Putra ke 1 Bpk. Sudarso - Ibu Sri Nur Restu Ningsih<br>Dukuhjati Wetan - Kedungbanteng</p>
+                    </div>
+                    
+                    <div class="text-4xl text-amber-700 font-light">&</div>
+                    
+                    <div class="text-center">
+                        <h3 class="text-2xl md:text-3xl font-bold text-amber-800 mb-2">Sepviyanti</h3>
+                        <p class="text-amber-700">Putri ke 2 Bpk. Syarif - Ibu Mardiyah<br>Kemanggungan - Tarub</p>
+                    </div>
+                </div>
+                
+                <p class="text-lg md:text-xl mb-8 leading-relaxed">
+                    Tanpa mengurangi rasa hormat, perkenankan kami mengundang Bapak/Ibu/Saudara/i 
+                    untuk hadir dan memberikan doa restu pada acara pernikahan kami.
+                </p>
+            </section>
+            
+            <!-- Event Details -->
+            <section class="section mb-28 max-w-4xl mx-auto">
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="md:flex">
+                        <div class="p-8 md:w-1/2">
+                            <h3 class="text-2xl font-bold text-amber-800 mb-6 text-center">Akad Nikah</h3>
+                            <div class="flex items-center mb-4">
+                                <div class="text-amber-700 mr-4">
+                                    <i class="far fa-calendar-alt text-2xl"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium">Sabtu - Minggu</p>
+                                    <p class="text-gray-600">Selasa, 9 September 2025 | Pukul: 09.00 WIB. di mempelai putri</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center mb-6">
+                                <div class="text-amber-700 mr-4">
+                                    <i class="fas fa-map-marker-alt text-2xl"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium">Tempat Akad Nikah</p>
+                                    <p class="text-gray-600">Kemanggungan - Tarub</p>
+                                </div>
+                            </div>
+                            <a href="https://goo.gl/maps/example" target="_blank" class="block w-full bg-amber-700 hover:bg-amber-800 text-white text-center py-2 px-4 rounded-lg transition duration-300">
+                                <i class="fas fa-map-marked-alt mr-2"></i> Lihat di Peta
+                            </a>
+                        </div>
+                        
+                        <div class="p-8 md:w-1/2 bg-amber-50">
+                            <h3 class="text-2xl font-bold text-amber-800 mb-6 text-center">Resepsi</h3>
+                            <div class="flex items-center mb-4">
+                                <div class="text-amber-700 mr-4">
+                                    <i class="far fa-calendar-alt text-2xl"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium">Sabtu, 25 November 2023</p>
+                                    <p class="text-gray-600">13-14 September 2025 | Pukul: 09.00 WIB s.d selesai</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center mb-6">
+                                <div class="text-amber-700 mr-4">
+                                    <i class="fas fa-map-marker-alt text-2xl"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium">Ds. Dukuhjati Wetan Rt.09 Rw.05</p>
+                                    <p class="text-gray-600">Kec. Kedungbanteng Kab. Tegal</p>
+                                </div>
+                            </div>
+                            <a href="https://goo.gl/maps/example" target="_blank" class="block w-full bg-amber-700 hover:bg-amber-800 text-white text-center py-2 px-4 rounded-lg transition duration-300">
+                                <i class="fas fa-map-marked-alt mr-2"></i> Lihat di Peta
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Dress Code -->
+            <section class="section mb-28 max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl font-bold text-amber-800 mb-6">Dress Code</h2>
+                <p class="text-lg text-amber-700">
+                    Bebas dan sopan sesuai kenyamanan Anda
+                </p>
+            </section>
+            
+            <!-- Romantic Quote -->
+            <section class="section mb-28 max-w-3xl mx-auto text-center">
+                <div class="relative">
+                    <div class="absolute -top-6 -left-6 text-amber-200 text-6xl">"</div>
+                    <p class="text-xl md:text-2xl italic text-amber-700 px-8 py-4">
+                        Cinta sejati bukan tentang menemukan seseorang yang sempurna, 
+                        tetapi belajar melihat seseorang yang tidak sempurna dengan cara yang sempurna.
+                    </p>
+                    <div class="absolute -bottom-6 -right-6 text-amber-200 text-6xl">"</div>
+                </div>
+            </section>
+            
+            <!-- Gallery -->
+            <section class="section mb-28 max-w-6xl mx-auto">
+                <h2 class="text-3xl font-bold text-amber-800 mb-12 text-center">Galeri Prewedding</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="gallery-item overflow-hidden rounded-lg shadow-md">
+                        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                             alt="Prewedding 1" class="w-full h-64 object-cover">
+                    </div>
+                    <div class="gallery-item overflow-hidden rounded-lg shadow-md">
+                        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                             alt="Prewedding 2" class="w-full h-64 object-cover">
+                    </div>
+                    <div class="gallery-item overflow-hidden rounded-lg shadow-md">
+                        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                             alt="Prewedding 3" class="w-full h-64 object-cover">
+                    </div>
+                </div>
+            </section>
+            
+            <!-- RSVP -->
+            <section class="section mb-16 max-w-2xl mx-auto">
+                <div class="bg-white rounded-xl shadow-md overflow-hidden p-8">
+                    <h2 class="text-3xl font-bold text-amber-800 mb-8 text-center">Konfirmasi Kehadiran</h2>
+                    <form class="rsvp-form space-y-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap</label>
+                            <input type="text" id="name" class="w-full px-4 py-2 rounded-lg border focus:ring-amber-500 focus:border-amber-500">
+                        </div>
+                        
+                        <div>
+                            <label for="attendance" class="block text-sm font-medium text-gray-700 mb-1">Konfirmasi Kehadiran</label>
+                            <select id="attendance" class="w-full px-4 py-2 rounded-lg border focus:ring-amber-500 focus:border-amber-500">
+                                <option value="">-- Pilih --</option>
+                                <option value="yes">Hadir</option>
+                                <option value="no">Tidak Hadir</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Ucapan (Opsional)</label>
+                            <textarea id="message" rows="3" class="w-full px-4 py-2 rounded-lg border focus:ring-amber-500 focus:border-amber-500"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-amber-700 hover:bg-amber-800 text-white py-3 px-4 rounded-lg transition duration-300">
+                            Kirim Konfirmasi
+                        </button>
+                    </form>
+                </div>
+            </section>
+            
+            <!-- Closing -->
+            <section class="section max-w-3xl mx-auto text-center">
+                <p class="text-lg md:text-xl mb-8 leading-relaxed">
+                    Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i 
+                    berkenan hadir untuk memberikan doa restu kepada kami.
+                </p>
+                <p class="text-lg md:text-xl mb-12 leading-relaxed">
+                    Wassalamu'alaikum Warahmatullahi Wabarakatuh
+                </p>
+                
+                <div class="flex justify-center gap-12 mb-16">
+                    <div class="text-center">
+                        <h3 class="text-xl font-bold text-amber-800 mb-2">Keluarga Besar</h3>
+                        <p class="text-amber-700">Diyan Wisnu Pratama</p>
+                    </div>
+                    
+                    <div class="text-center">
+                        <h3 class="text-xl font-bold text-amber-800 mb-2">&</h3>
+                    </div>
+                    
+                    <div class="text-center">
+                        <h3 class="text-xl font-bold text-amber-800 mb-2">Keluarga Besar</h3>
+                        <p class="text-amber-700">Sepviyanti</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-amber-800 text-amber-100 py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p>© 2025 Undangan Pernikahan Diyan Wisnu Pratama & Sepviyantis. All Rights Reserved.</p>
+            <div class="flex justify-center space-x-4 mt-4">
+                <a href="#" class="hover:text-white transition duration-300">
+                    <i class="fab fa-instagram text-xl"></i>
+                </a>
+                <a href="#" class="hover:text-white transition duration-300">
+                    <i class="fab fa-whatsapp text-xl"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Music Toggle
+        const musicToggle = document.getElementById('musicToggle');
+        const bgMusic = document.getElementById('bgMusic');
+        let isPlaying = false;
+        
+        musicToggle.addEventListener('click', function() {
+            if (isPlaying) {
+                bgMusic.pause();
+                musicToggle.innerHTML = '<i class="fas fa-music text-xl"></i>';
+            } else {
+                bgMusic.play();
+                musicToggle.innerHTML = '<i class="fas fa-pause text-xl"></i>';
+            }
+            isPlaying = !isPlaying;
+        });
+        
+        // Scroll Animation
+        const sections = document.querySelectorAll('.section');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+        
+        // RSVP Form Submission
+        const rsvpForm = document.querySelector('.rsvp-form');
+        if (rsvpForm) {
+            rsvpForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Terima kasih telah mengkonfirmasi kehadiran Anda!');
+                this.reset();
+            });
+        }
+    </script>
+</body>
+</html>
